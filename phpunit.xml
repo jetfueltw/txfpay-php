@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         syntaxCheck="false">
+    <testsuites>
+        <testsuite name="Unit Test">
+            <directory suffix=".php">./tests/</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="ORG_ID" value="4620183417180383"/>>
+        <env name="MERCHANT_ID" value="502018351718032172"/>
+        <env name="SECRET_KEY" value="hcbRtRjZfAdZ8NwkAkAxGJFHi54paPiS"/>
+    </php>
+</phpunit>
