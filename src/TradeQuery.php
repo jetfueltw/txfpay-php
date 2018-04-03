@@ -35,11 +35,12 @@ class TradeQuery extends Payment
         ];
         $payload = $this->signPayload([
             'businessData'        => json_encode($businessData),
+            'requestId'           => $tradeNo,
             'productId'           => self::PRODUCT_ID_QUERY,
         ]);
         
         $order = $this->parseResponse($this->httpClient->post('query/invoke', $payload));
-        
+        var_dump('order = ', $order);
         if ($order['key'] !== '00' && $order['key'] !== '05') {
             return null;
         }

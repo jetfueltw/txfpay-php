@@ -62,7 +62,6 @@ class Payment
      */
     protected function signPayload(array $payload)
     {
-        $payload['requestId'] = date('YmdHis').rand(10000, 99999);
         $payload['orgId'] = $this->orgId;
         $payload['timestamp'] = $this->getCurrentTime();
         $payload['signData'] = Signature::generate($payload, $this->secretKey);

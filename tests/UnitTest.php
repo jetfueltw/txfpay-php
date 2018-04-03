@@ -117,7 +117,7 @@ class UnitTest extends TestCase
     public function testTradeQueryFindOrderNotExist()
     {
         $faker = Factory::create();
-        $tradeNo = $faker->uuid;
+        $tradeNo = substr($faker->uuid,0,20);
 
         $tradeQuery = new TradeQuery($this->orgId, $this->merchantId, $this->secretKey);
         $result = $tradeQuery->find($tradeNo);
@@ -128,7 +128,7 @@ class UnitTest extends TestCase
     public function testTradeQueryIsPaidOrderNotExist()
     {
         $faker = Factory::create();
-        $tradeNo = $faker->uuid;
+        $tradeNo = substr($faker->uuid,0,20);
 
         $tradeQuery = new TradeQuery($this->orgId, $this->merchantId, $this->secretKey);
         $result = $tradeQuery->isPaid($tradeNo);

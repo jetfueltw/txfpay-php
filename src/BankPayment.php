@@ -51,6 +51,7 @@ class BankPayment extends Payment
         ];
         $payload = $this->signPayload([
             'businessData'        => json_encode($businessData),
+            'requestId'           => $tradeNo,
             'productId'           => self::PRODUCT_ID_BANK,
         ]);
         
