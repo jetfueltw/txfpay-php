@@ -8,6 +8,8 @@ class TradeQuery extends Payment
 {
     use ResultParser;
 
+    const PRODUCT_ID_QUERY = '9701';
+
     /**
      * DigitalPayment constructor.
      *
@@ -28,13 +30,17 @@ class TradeQuery extends Payment
      */
     public function find($tradeNo)
     {
+        $businessData = [
+            'order_id'  => $tradeNo,
+        ];
         $payload = $this->signPayload([
-            'orderNo' => $tradeNo,
+            'businessData'        => json_encode($businessData),
+            'productId'           => self::PRODUCT_ID_QUERY,
         ]);
-
-        $order = $this->parseResponse($this->httpClient->get($this->merchantId.'-'.$tradeNo, $payload));
-
-        if ($order['respCode'] !== 'S0001') {
+        
+        $order = $this->parseResponse($this->httpClient->post('query/invoke', $payload));
+        
+        if ($order['key'] !== '00' && $order['key'] !== '05') {
             return null;
         }
 
@@ -51,7 +57,7 @@ class TradeQuery extends Payment
     {
         $order = $this->find($tradeNo);
 
-        if ($order === null || !isset($order['status']) || $order['status'] !== 'completed') {
+        if ($order === null || !isset($order['result']) || json_decode($order['result'], true)['payment_status'] !=='1'  ) {
             return false;
         }
 

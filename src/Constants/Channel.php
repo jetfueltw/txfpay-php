@@ -7,30 +7,26 @@ class Channel
     /**
      * 微信支付
      */
-    const WECHAT = 'WXPAY';
+    const WECHAT = '0101';
 
     /**
      * 支付寶
      */
-    const ALIPAY = 'ALIPAY';
+    const ALIPAY = '0201';
 
     /**
      * QQ錢包
      */
-    const QQ = 'QQPAY';
+    const QQ = '0501';
 
     /**
      * 京東支付
      */
-    const JDPAY = 'JDPAY';
+    const JDPAY = '0601';
 
     /**
      * 銀聯
      */
-    const UNIONPAY = 'UNIONPAY';
+    const UNIONPAY = '0701';
 
-    /**
-     * 快捷支付
-     */
-    const QUICKPAY = 'QUICKPAY';
 }

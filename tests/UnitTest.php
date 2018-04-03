@@ -30,16 +30,16 @@ class UnitTest extends TestCase
     public function testDigitalPaymentOrder()
     {
         $faker = Factory::create();
-        $tradeNo = $faker->uuid;
-        $channel = '0101';//Channel::QQ;
-        $amount = 100;
+        $tradeNo = date('YmdHis').rand(1000, 9999);
+        $channel = Channel::QQ;
+        $amount = 200;
         $notifyUrl = $faker->url;
         $returnUrl = $faker->url;
 
         $payment = new DigitalPayment($this->orgId, $this->merchantId, $this->secretKey);
         $result = $payment->order($tradeNo, $channel, $amount, $notifyUrl, $returnUrl);
         var_dump($result);
-        $this->assertEquals('S0001', $result['respCode']);
+        $this->assertArrayHasKey('result',$result);
         
         return $tradeNo;
     }
@@ -49,114 +49,108 @@ class UnitTest extends TestCase
      *
      * @param $tradeNo
      */
-    // public function testDigitalPaymentOrderFind($tradeNo)
-    // {
-    //     $tradeQuery = new TradeQuery($this->merchantId, $this->secretKey);
-    //     $result = $tradeQuery->find($tradeNo);
-
-    //     $this->assertEquals('S0001', $result['respCode']);
-    // }
+    public function testDigitalPaymentOrderFind($tradeNo)
+    {
+        $tradeQuery = new TradeQuery($this->orgId, $this->merchantId, $this->secretKey);
+        $result = $tradeQuery->find($tradeNo);
+        var_dump($result);
+        $this->assertEquals('00', $result['respCode']);
+    }
 
     /**
      * @depends testDigitalPaymentOrder
      *
      * @param $tradeNo
      */
-    // public function testDigitalPaymentOrderIsPaid($tradeNo)
-    // {
-    //     $tradeQuery = new TradeQuery($this->merchantId, $this->secretKey);
-    //     $result = $tradeQuery->isPaid($tradeNo);
+    public function testDigitalPaymentOrderIsPaid($tradeNo)
+    {
+        $tradeQuery = new TradeQuery($this->orgId, $this->merchantId, $this->secretKey);
+        $result = $tradeQuery->isPaid($tradeNo);
 
-    //     $this->assertFalse($result);
-    // }
+        $this->assertFalse($result);
+    }
 
-    // public function testBankPaymentOrder()
-    // {
-    //     $faker = Factory::create();
-    //     $tradeNo = $faker->uuid;
-    //     $bank = Bank::CCB;
-    //     $amount = 1;
-    //     $returnUrl = $faker->url;
-    //     $notifyUrl = $faker->url;
+    public function testBankPaymentOrder()
+    {
+        $faker = Factory::create();
+        $tradeNo = date('YmdHis').rand(1000, 9999);
+        $bank = Bank::ICBC;
+        $amount = 200;
+        $returnUrl = 'http://www.yahoo.com';//$faker->url;
+        $notifyUrl = 'http://www.yahoo.com';//'$faker->url;
 
-    //     $payment = new BankPayment($this->merchantId, $this->secretKey);
-    //     $result = $payment->order($tradeNo, $bank, $amount, $notifyUrl, $returnUrl);
+        $payment = new BankPayment($this->orgId, $this->merchantId, $this->secretKey);
+        $result = $payment->order($tradeNo, $bank, $amount, $notifyUrl, $returnUrl);
+        var_dump($result);
 
-    //     $this->assertContains('<form', $result, '', true);
+        $this->assertContains('https', $result, '', true);
 
-    //     return $tradeNo;
-    // }
-
-    /**
-     * @depends testBankPaymentOrder
-     *
-     * @param $tradeNo
-     */
-    // public function testBankPaymentOrderFind($tradeNo)
-    // {
-    //     $tradeQuery = new TradeQuery($this->merchantId, $this->secretKey);
-    //     $result = $tradeQuery->find($tradeNo);
-
-    //     $this->assertEquals('S0001', $result['respCode']);
-    // }
+        return $tradeNo;
+    }
 
     /**
      * @depends testBankPaymentOrder
      *
      * @param $tradeNo
      */
-    // public function testBankPaymentOrderIsPaid($tradeNo)
-    // {
-    //     $tradeQuery = new TradeQuery($this->merchantId, $this->secretKey);
-    //     $result = $tradeQuery->isPaid($tradeNo);
+    public function testBankPaymentOrderFind($tradeNo)
+    {
+        $tradeQuery = new TradeQuery($this->orgId, $this->merchantId, $this->secretKey);
+        $result = $tradeQuery->find($tradeNo);
+        
+        $this->assertEquals('00', $result['respCode']);
+    }
 
-    //     $this->assertFalse($result);
-    // }
+    /**
+     * @depends testBankPaymentOrder
+     *
+     * @param $tradeNo
+     */
+    public function testBankPaymentOrderIsPaid($tradeNo)
+    {
+        $tradeQuery = new TradeQuery($this->orgId, $this->merchantId, $this->secretKey);
+        $result = $tradeQuery->isPaid($tradeNo);
 
-    // public function testTradeQueryFindOrderNotExist()
-    // {
-    //     $faker = Factory::create();
-    //     $tradeNo = $faker->uuid;
+        $this->assertFalse($result);
+    }
 
-    //     $tradeQuery = new TradeQuery($this->merchantId, $this->secretKey);
-    //     $result = $tradeQuery->find($tradeNo);
+    public function testTradeQueryFindOrderNotExist()
+    {
+        $faker = Factory::create();
+        $tradeNo = $faker->uuid;
 
-    //     $this->assertNull($result);
-    // }
+        $tradeQuery = new TradeQuery($this->orgId, $this->merchantId, $this->secretKey);
+        $result = $tradeQuery->find($tradeNo);
 
-    // public function testTradeQueryIsPaidOrderNotExist()
-    // {
-    //     $faker = Factory::create();
-    //     $tradeNo = $faker->uuid;
+        $this->assertNull($result);
+    }
 
-    //     $tradeQuery = new TradeQuery($this->merchantId, $this->secretKey);
-    //     $result = $tradeQuery->isPaid($tradeNo);
+    public function testTradeQueryIsPaidOrderNotExist()
+    {
+        $faker = Factory::create();
+        $tradeNo = $faker->uuid;
 
-    //     $this->assertFalse($result);
-    // }
+        $tradeQuery = new TradeQuery($this->orgId, $this->merchantId, $this->secretKey);
+        $result = $tradeQuery->isPaid($tradeNo);
+
+        $this->assertFalse($result);
+    }
 
     public function testNotifyWebhookVerifyNotifyPayload()
     {
         $mock = $this->getMockForTrait(NotifyWebhook::class);
 
         $payload = [
-            'body'           => 'GOODS_BODY',
-            'ext_param2'     => 'ALIPAY',
-            'gmt_create'     => '2017-08-07 06:08:08',
-            'gmt_payment'    => '2017-08-07 08:08:08',
-            'is_success'     => 'T',
-            'notify_id'      => '1111',
-            'notify_time'    => '2017-08-07 09:08:08',
-            'notify_type'    => 'WAIT_TRIGGER',
-            'order_no'       => 'AAAA00001',
-            'payment_type'   => '1',
-            'seller_actions' => 'SEND_GOODS',
-            'title'          => 'GOODS_NAME',
-            'total_fee'      => '1.00',
-            'trade_no'       => 'aaabbb0001',
-            'trade_status'   => 'TRADE_FINISHED',
-            'signType'       => 'SHA',
-            'sign'           => '9343B14E30CEDDE75128603E5E15C93CD80A3651',
+            'orgid'          => '3320183127110317',
+            'merno'          => '562018352711036625',
+            'amount'         => '200',
+            'goods_info'     => 'goods_info',
+            'trade_date'     => '2018-04-03 10:00:00',
+            'trade_status'   => '0',
+            'order_id'       => '201804030605516317',
+            'plat_order_id'  => '2018040314055371674643',
+            'sign_data'      => 'C7EE6DA3792A752D836DC92DEE46B8CF',
+            'timestamp'      => '20180403141901',
         ];
 
         $this->assertTrue($mock->verifyNotifyPayload($payload, $this->secretKey));
@@ -167,43 +161,29 @@ class UnitTest extends TestCase
         $mock = $this->getMockForTrait(NotifyWebhook::class);
 
         $payload = [
-            'body'           => 'GOODS_BODY',
-            'ext_param2'     => 'ALIPAY',
-            'gmt_create'     => '2017-08-07 06:08:08',
-            'gmt_payment'    => '2017-08-07 08:08:08',
-            'is_success'     => 'T',
-            'notify_id'      => '1111',
-            'notify_time'    => '2017-08-07 09:08:08',
-            'notify_type'    => 'WAIT_TRIGGER',
-            'order_no'       => 'AAAA00001',
-            'payment_type'   => '1',
-            'seller_actions' => 'SEND_GOODS',
-            'title'          => 'GOODS_NAME',
-            'total_fee'      => '1.00',
-            'trade_no'       => 'aaabbb0001',
-            'trade_status'   => 'TRADE_FINISHED',
-            'signType'       => 'SHA',
-            'sign'           => '9343B14E30CEDDE75128603E5E15C93CD80A3651',
+            'orgid'          => '3320183127110317',
+            'merno'          => '562018352711036625',
+            'amount'         => '200',
+            'goods_info'     => 'goods_info',
+            'trade_date'     => '2018-04-03 10:00:00',
+            'trade_status'   => '0',
+            'order_id'       => '201804030605516317',
+            'plat_order_id'  => '2018040314055371674643',
+            'sign_data'      => 'C7EE6DA3792A752D836DC92DEE46B8CF',
+            'timestamp'      => '20180403141901',
         ];
 
         $this->assertEquals([
-            'body'           => 'GOODS_BODY',
-            'ext_param2'     => 'ALIPAY',
-            'gmt_create'     => '2017-08-07 06:08:08',
-            'gmt_payment'    => '2017-08-07 08:08:08',
-            'is_success'     => 'T',
-            'notify_id'      => '1111',
-            'notify_time'    => '2017-08-07 09:08:08',
-            'notify_type'    => 'WAIT_TRIGGER',
-            'order_no'       => 'AAAA00001',
-            'payment_type'   => '1',
-            'seller_actions' => 'SEND_GOODS',
-            'title'          => 'GOODS_NAME',
-            'total_fee'      => '1.00',
-            'trade_no'       => 'aaabbb0001',
-            'trade_status'   => 'TRADE_FINISHED',
-            'signType'       => 'SHA',
-            'sign'           => '9343B14E30CEDDE75128603E5E15C93CD80A3651',
+            'orgid'          => '3320183127110317',
+            'merno'          => '562018352711036625',
+            'amount'         => '200',
+            'goods_info'     => 'goods_info',
+            'trade_date'     => '2018-04-03 10:00:00',
+            'trade_status'   => '0',
+            'order_id'       => '201804030605516317',
+            'plat_order_id'  => '2018040314055371674643',
+            'sign_data'      => 'C7EE6DA3792A752D836DC92DEE46B8CF',
+            'timestamp'      => '20180403141901',
         ], $mock->parseNotifyPayload($payload, $this->secretKey));
     }
 
@@ -211,7 +191,7 @@ class UnitTest extends TestCase
     {
         $mock = $this->getMockForTrait(NotifyWebhook::class);
 
-        $this->assertEquals('success', $mock->successNotifyResponse());
+        $this->assertEquals('0000', $mock->successNotifyResponse());
     }
 
 }

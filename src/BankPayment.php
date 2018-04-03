@@ -1,10 +1,15 @@
 <?php
 
 namespace Jetfuel\Txfpay;
+use Jetfuel\Txfpay\Traits\ResultParser;
+use Jetfuel\Txfpay\Constants\Bank;
 
 class BankPayment extends Payment
 {
-    const IS_APP = 'web';
+    use ResultParser;
+
+    const PRODUCT_ID_BANK = '0500';
+    const GOODS_INFO = 'goods_info';
 
     /**
      * BankPayment constructor.
@@ -30,20 +35,32 @@ class BankPayment extends Payment
      */
     public function order($tradeNo, $bank, $amount, $notifyUrl, $returnUrl)
     {
+        $businessData = [
+            'merno'     => $this->merchantId,
+            'bus_no'    => '0499',
+            'amount'    => $amount,
+            'goods_info'=> self::GOODS_INFO,
+            'order_id'  => $tradeNo,
+            'cardname' => $bank,
+            'bank_code' => Bank::BANK_CODE[$bank],
+            //'cardno'   => '1111111111',
+            'return_url'=> $returnUrl,
+            'notify_url'=> $notifyUrl,
+            'card_type' => 1,
+            'channelid' => 1,
+        ];
         $payload = $this->signPayload([
-            'body'        => self::GOODS_BODY,
-            'defaultbank' => $bank,
-            'isApp'       => self::IS_APP,
-            'notifyUrl'   => $notifyUrl,
-            'orderNo'     => $tradeNo,
-            'paymentType' => self::PAYMENT_TYPE,
-            'paymethod'   => self::PAY_METHOD,
-            'returnUrl'   => $returnUrl,
-            'service'     => self::SERVICE,
-            'title'       => self::GOODS_NAME,
-            'totalFee'    => $amount,
+            'businessData'        => json_encode($businessData),
+            'productId'           => self::PRODUCT_ID_BANK,
         ]);
+        
+        $response = $this->parseResponse($this->httpClient->post('trade/invoke', $payload));
+        if ($response['result']) 
+        {
+           $html = json_decode($response['result'],true)['url'];
+           return $html;
+        }
 
-        return $this->httpClient->post($this->merchantId.'-'.$tradeNo, $payload);
+        return null;
     }
 }

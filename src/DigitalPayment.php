@@ -49,7 +49,6 @@ class DigitalPayment extends Payment
             'businessData'        => json_encode($businessData),
             'productId'           => self::PRODUCT_ID_SCAN,
         ]);
-        
         return $this->parseResponse($this->httpClient->post('trade/invoke', $payload));
     }
 }

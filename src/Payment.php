@@ -6,7 +6,8 @@ use Jetfuel\Txfpay\HttpClient\GuzzleHttpClient;
 
 class Payment
 {
-    const BASE_API_URL = 'http://118.31.38.147:18888/open-gateway/';
+    //const BASE_API_URL = 'http://118.31.38.147:18888/open-gateway/';
+   const BASE_API_URL = 'http://47.75.180.21:18888/open-gateway/';
     const TIME_ZONE      = 'Asia/Shanghai';
     const TIME_FORMAT    = 'YmdHis';
 

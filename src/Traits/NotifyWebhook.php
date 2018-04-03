@@ -15,15 +15,14 @@ trait NotifyWebhook
      */
     public function verifyNotifyPayload(array $payload, $secretKey)
     {
-        if (!isset($payload['sign'])) {
+        if (!isset($payload['sign_data'])) {
             return false;
         }
 
-        $signature = $payload['sign'];
+        $signature = $payload['sign_data'];
 
-        unset($payload['signType']);
-        unset($payload['sign']);
-
+        unset($payload['sign_data']);
+        
         return Signature::validate($payload, $secretKey, $signature);
     }
 
@@ -50,6 +49,6 @@ trait NotifyWebhook
      */
     public function successNotifyResponse()
     {
-        return 'success';
+        return '0000';
     }
 }
