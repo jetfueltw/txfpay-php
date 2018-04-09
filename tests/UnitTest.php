@@ -31,7 +31,7 @@ class UnitTest extends TestCase
     {
         $faker = Factory::create();
         $tradeNo = date('YmdHis').rand(1000, 9999);
-        $channel = Channel::UNIONPAY;
+        $channel = Channel::QQ;
         $amount = 2;
         $notifyUrl = $faker->url;
         $returnUrl = $faker->url;

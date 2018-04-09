@@ -59,7 +59,7 @@ class BankPayment extends Payment
         if ($response['result']) 
         {
            $html = json_decode($response['result'],true)['url'];
-           return $html;
+           return '<script> window.location = "'.$html.'"; </script>';
         }
 
         return null;
