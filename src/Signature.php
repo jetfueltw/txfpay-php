@@ -26,7 +26,7 @@ class Signature
      */
     public static function validate(array $payload, $secretKey, $signature)
     {
-        return self::generate($payload, $secretKey) === $signature;
+        return self::generate($payload, $secretKey) === strtoupper($signature);
     }
 
     private static function buildBaseString(array $payload)
