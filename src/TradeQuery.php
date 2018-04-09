@@ -40,11 +40,15 @@ class TradeQuery extends Payment
         ]);
         
         $order = $this->parseResponse($this->httpClient->post('query/invoke', $payload));
-        var_dump('order = ', $order);
+        
         if ($order['key'] !== '00' && $order['key'] !== '05') {
             return null;
         }
 
+        $result = json_decode($order['result'], true);
+        $result['amount'] = $this->convertFenToYuan( $result['amount']);
+        $order['result'] = json_encode($result);
+        
         return $order;
     }
 

@@ -39,7 +39,7 @@ class DigitalPayment extends Payment
         $businessData = [
             'merno'     => $this->merchantId,
             'bus_no'    => $channel,
-            'amount'    => $amount,
+            'amount'    => $this->convertYuanToFen($amount),
             'goods_info'=> self::GOODS_INFO,
             'order_id'  => $tradeNo,
             'return_url'=> $returnUrl,
@@ -49,7 +49,7 @@ class DigitalPayment extends Payment
             'businessData'        => json_encode($businessData),
             'requestId'           => $tradeNo,
             'productId'           => self::PRODUCT_ID_SCAN,
-        ]);var_dump($payload);
+        ]);
         return $this->parseResponse($this->httpClient->post('trade/invoke', $payload));
     }
 }

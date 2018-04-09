@@ -31,8 +31,8 @@ class UnitTest extends TestCase
     {
         $faker = Factory::create();
         $tradeNo = date('YmdHis').rand(1000, 9999);
-        $channel = Channel::QQ;
-        $amount = 200;
+        $channel = Channel::UNIONPAY;
+        $amount = 2;
         $notifyUrl = $faker->url;
         $returnUrl = $faker->url;
 
@@ -75,7 +75,7 @@ class UnitTest extends TestCase
         $faker = Factory::create();
         $tradeNo = date('YmdHis').rand(1000, 9999);
         $bank = Bank::ICBC;
-        $amount = 200;
+        $amount = 2;
         $returnUrl = 'http://www.yahoo.com';//$faker->url;
         $notifyUrl = 'http://www.yahoo.com';//'$faker->url;
 
@@ -176,7 +176,7 @@ class UnitTest extends TestCase
         $this->assertEquals([
             'orgid'          => '3320183127110317',
             'merno'          => '562018352711036625',
-            'amount'         => '200',
+            'amount'         => '2',
             'goods_info'     => 'goods_info',
             'trade_date'     => '2018-04-03 10:00:00',
             'trade_status'   => '0',

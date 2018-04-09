@@ -38,7 +38,7 @@ class BankPayment extends Payment
         $businessData = [
             'merno'     => $this->merchantId,
             'bus_no'    => '0499',
-            'amount'    => $amount,
+            'amount'    => $this->convertYuanToFen($amount),
             'goods_info'=> self::GOODS_INFO,
             'order_id'  => $tradeNo,
             'cardname' => $bank,
