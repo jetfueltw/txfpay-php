@@ -50,6 +50,7 @@ class DigitalPayment extends Payment
             'requestId'           => $tradeNo,
             'productId'           => self::PRODUCT_ID_SCAN,
         ]);
+
         return $this->parseResponse($this->httpClient->post('trade/invoke', $payload));
     }
 }
