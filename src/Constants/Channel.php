@@ -5,14 +5,14 @@ namespace Jetfuel\Txfpay\Constants;
 class Channel
 {
     /**
-     * 微信支付 目前使用京東條碼
+     * 微信支付 
      */
-    const WECHAT = '0601';//'0101';
+    const WECHAT = '0101';
 
     /**
-     * 支付寶 目前使用京東條碼
+     * 支付寶 
      */
-    const ALIPAY = '0601';//'0201';
+    const ALIPAY = '0201';
 
     /**
      * QQ錢包

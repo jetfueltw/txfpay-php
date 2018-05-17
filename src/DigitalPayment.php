@@ -3,6 +3,7 @@
 namespace Jetfuel\Txfpay;
 
 use Jetfuel\Txfpay\Traits\ResultParser;
+use Jetfuel\Txfpay\Constants\Channel;
 
 class DigitalPayment extends Payment
 {
@@ -36,6 +37,9 @@ class DigitalPayment extends Payment
      */
     public function order($tradeNo, $channel, $amount, $notifyUrl, $returnUrl)
     {
+        if (($channel === Channel::WECHAT) || ($channel === Channel::ALIPAY)) {
+            $channel = Channel::JDPAY;
+        }
         $businessData = [
             'merno'     => $this->merchantId,
             'bus_no'    => $channel,
