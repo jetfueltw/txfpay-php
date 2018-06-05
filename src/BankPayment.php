@@ -56,7 +56,7 @@ class BankPayment extends Payment
         ]);
         
         $response = $this->parseResponse($this->httpClient->post('trade/invoke', $payload));
-        if ($response['result']) 
+        if (isset($response['result'])) 
         {
            $html = json_decode($response['result'],true)['url'];
            return '<script> window.location = "'.$html.'"; </script>';
