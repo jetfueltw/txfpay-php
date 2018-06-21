@@ -10,7 +10,7 @@ class Payment
     use ConvertMoney;
     //const BASE_API_URL = 'http://118.31.38.147:18888/open-gateway/';
    //const BASE_API_URL = 'http://47.75.180.21:18888/open-gateway/';
-   const BASE_API_URL = 'http://www.txpays.com/open-gateway/';
+   const BASE_API_URL = 'https://www.txpays.com/open-gateway/';
     const TIME_ZONE      = 'Asia/Shanghai';
     const TIME_FORMAT    = 'YmdHis';
 
