@@ -31,10 +31,10 @@ class UnitTest extends TestCase
     {
         $faker = Factory::create();
         $tradeNo = date('YmdHis').rand(1000, 9999);
-        $channel = Channel::UNIONPAY;
-        $amount = 2;
-        $notifyUrl = $faker->url;
-        $returnUrl = $faker->url;
+        $channel = Channel::JDPAY;
+        $amount = 99;
+        $notifyUrl = 'http://a.a.com';
+        $returnUrl = 'http://a.a.com';
 
         $payment = new DigitalPayment($this->orgId, $this->merchantId, $this->secretKey);
         $result = $payment->order($tradeNo, $channel, $amount, $notifyUrl, $returnUrl);
