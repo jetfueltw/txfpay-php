@@ -1,13 +1,13 @@
 ## 介紹
 
-同心支付 PHP 版本封裝。
+廣匯付 PHP 版本封裝。
 
 ## 安裝
 
 使用 Composer 安裝。
 
 ```
-composer require jetfueltw/txfpay-php
+composer require jetfueltw/ghfpay-php
 ```
 
 ## 使用方法

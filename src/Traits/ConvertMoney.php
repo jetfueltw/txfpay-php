@@ -1,6 +1,6 @@
 <?php
 
-namespace Jetfuel\Txfpay\Traits;
+namespace Jetfuel\Ghfpay\Traits;
 
 trait ConvertMoney
 {

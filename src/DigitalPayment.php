@@ -1,9 +1,9 @@
 <?php
 
-namespace Jetfuel\Txfpay;
+namespace Jetfuel\Ghfpay;
 
-use Jetfuel\Txfpay\Traits\ResultParser;
-use Jetfuel\Txfpay\Constants\Channel;
+use Jetfuel\Ghfpay\Traits\ResultParser;
+use Jetfuel\Ghfpay\Constants\Channel;
 
 class DigitalPayment extends Payment
 {

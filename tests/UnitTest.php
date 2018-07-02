@@ -3,13 +3,13 @@
 namespace Test;
 
 use Faker\Factory;
-use Jetfuel\Txfpay\BankPayment;
-use Jetfuel\Txfpay\Constants\Bank;
-use Jetfuel\Txfpay\Constants\Channel;
-use Jetfuel\Txfpay\DigitalPayment;
-use Jetfuel\Txfpay\TradeQuery;
-use Jetfuel\Txfpay\Traits\NotifyWebhook;
-use Jetfuel\Txfpay\BalanceQuery;
+use Jetfuel\Ghfpay\BankPayment;
+use Jetfuel\Ghfpay\Constants\Bank;
+use Jetfuel\Ghfpay\Constants\Channel;
+use Jetfuel\Ghfpay\DigitalPayment;
+use Jetfuel\Ghfpay\TradeQuery;
+use Jetfuel\Ghfpay\Traits\NotifyWebhook;
+use Jetfuel\Ghfpay\BalanceQuery;
 use PHPUnit\Framework\TestCase;
 
 class UnitTest extends TestCase

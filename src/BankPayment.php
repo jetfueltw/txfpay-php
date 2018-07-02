@@ -1,8 +1,8 @@
 <?php
 
-namespace Jetfuel\Txfpay;
-use Jetfuel\Txfpay\Traits\ResultParser;
-use Jetfuel\Txfpay\Constants\Bank;
+namespace Jetfuel\Ghfpay;
+use Jetfuel\Ghfpay\Traits\ResultParser;
+use Jetfuel\Ghfpay\Constants\Bank;
 
 class BankPayment extends Payment
 {

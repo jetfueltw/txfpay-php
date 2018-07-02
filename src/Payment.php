@@ -1,9 +1,9 @@
 <?php
 
-namespace Jetfuel\Txfpay;
+namespace Jetfuel\Ghfpay;
 
-use Jetfuel\Txfpay\HttpClient\GuzzleHttpClient;
-use Jetfuel\Txfpay\Traits\ConvertMoney;
+use Jetfuel\Ghfpay\HttpClient\GuzzleHttpClient;
+use Jetfuel\Ghfpay\Traits\ConvertMoney;
 
 class Payment
 {
@@ -35,7 +35,7 @@ class Payment
     protected $baseApiUrl;
 
     /**
-     * @var \Jetfuel\Txfpay\HttpClient\HttpClientInterface
+     * @var \Jetfuel\Ghfpay\HttpClient\HttpClientInterface
      */
     protected $httpClient;
 

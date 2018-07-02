@@ -1,6 +1,6 @@
 <?php
 
-namespace Jetfuel\Txfpay\HttpClient;
+namespace Jetfuel\Ghfpay\HttpClient;
 
 use GuzzleHttp\Client;
 
