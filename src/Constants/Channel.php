@@ -1,6 +1,6 @@
 <?php
 
-namespace Jetfuel\Ghfpay\Constants;
+namespace Jetfuel\Txfpay\Constants;
 
 class Channel
 {

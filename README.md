@@ -7,7 +7,7 @@
 使用 Composer 安裝。
 
 ```
-composer require jetfueltw/ghfpay-php
+composer require jetfueltw/txfpay-php
 ```
 
 ## 使用方法

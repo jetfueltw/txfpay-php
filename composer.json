@@ -1,6 +1,6 @@
 {
-  "name": "jetfueltw/ghfpay-php",
-  "description": "Ghfpay payment gateway php package",
+  "name": "jetfueltw/txfpay-php",
+  "description": "Txfpay payment gateway php package",
   "keywords": [
     "payment",
     "payment gateway"
@@ -23,7 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Jetfuel\\Ghfpay\\": "src"
+      "Jetfuel\\Txfpay\\": "src"
     }
   },
   "autoload-dev": {

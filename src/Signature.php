@@ -1,6 +1,6 @@
 <?php
 
-namespace Jetfuel\Ghfpay;
+namespace Jetfuel\Txfpay;
 
 class Signature
 {

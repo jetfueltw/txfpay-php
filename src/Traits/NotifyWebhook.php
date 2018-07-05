@@ -1,8 +1,8 @@
 <?php
 
-namespace Jetfuel\Ghfpay\Traits;
+namespace Jetfuel\Txfpay\Traits;
 
-use Jetfuel\Ghfpay\Signature;
+use Jetfuel\Txfpay\Signature;
 
 trait NotifyWebhook
 {

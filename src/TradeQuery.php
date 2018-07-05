@@ -1,8 +1,8 @@
 <?php
 
-namespace Jetfuel\Ghfpay;
+namespace Jetfuel\Txfpay;
 
-use Jetfuel\Ghfpay\Traits\ResultParser;
+use Jetfuel\Txfpay\Traits\ResultParser;
 
 class TradeQuery extends Payment
 {
